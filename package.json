@@ -1,0 +1,109 @@
+{
+  "name": "strapped",
+  "displayName": "Strapped",
+  "description": "Starter Bootstrap Theme for Ghost Platform",
+  "version": "1.0.0",
+  "engines": {
+    "ghost": ">=5.0.0"
+  },
+  "main": "assets/js/bundle.js",
+  "browser": "index.hbs",
+  "files": [
+    "*.hbs",
+    "**/*.hbs",
+    "assets"
+  ],
+  "author": {
+    "name": "Carlito Platanito",
+    "email": "carlitoplatanito@gmail.com",
+    "url": "https://www.carlitoplatanito.com"
+  },
+  "license": "MIT",
+  "private": false,
+  "screenshots": {
+    "desktop": "assets/screenshot-desktop.jpg",
+    "mobile": "assets/screenshot-mobile.jpg"
+  },
+  "gpm": {
+    "type": "theme",
+    "categories": [
+      "Minimal",
+      "Portfolio",
+      "Corporate",
+      "Blog",
+      "Starter",
+      "Bootstrap"
+    ]
+  },
+  "keywords": [
+    "ghost",
+    "theme",
+    "ghost-theme",
+    "bootstrap"
+  ],
+  "repository": "https://github.com/carlitoplatanito/strapped-ghost-theme.git",
+  "bugs": "https://github.com/carlitoplatanito/strapped-ghost-theme/issues",
+  "contributors": "https://github.com/carlitoplatanito/strapped-ghost-theme/graphs/contributors",
+  "config": {
+    "posts_per_page": 30,
+    "image_sizes": {
+      "xxs": {
+        "width": 50
+      },
+      "xs": {
+        "width": 100
+      },
+      "s": {
+        "width": 300
+      },
+      "m": {
+        "width": 600
+      },
+      "l": {
+        "width": 1000
+      },
+      "xl": {
+        "width": 2000
+      }
+    },
+    "card_assets": true,
+    "custom": {
+      "instagram": {
+        "type": "text",
+        "default": "https://instagram.com/carlitoplatanito"
+      }
+    }
+  },
+  "browserslist": [
+    "defaults"
+  ],
+  "scripts": {
+    "start": "make watch",
+    "prepare": "make",
+    "test": "make test",
+    "prepack": "make",
+    "postpack": "make zip"
+  },
+  "dependencies": {
+    "@popperjs/core": "^2.10.2",
+    "aos": "^2.3.4",
+    "bootstrap": "^5.1.3",
+    "bootstrap-icons": "^1.9.1",
+    "jquery": "^3.6.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.2.5",
+    "browserify": "^17.0.0",
+    "cssnano": "^4.1.10",
+    "gscan": "^4.34.0",
+    "imagemin-cli": "^7.0.0",
+    "imagemin-gifsicle": "^7.0.0",
+    "imagemin-mozjpeg": "^10.0.0",
+    "imagemin-pngquant": "^9.0.2",
+    "imagemin-webp": "^7.0.0",
+    "jsdom": "^19.0.0",
+    "lodash": "^4.17.21",
+    "postcss": "^8.2.13",
+    "sass": "^1.50.0"
+  }
+}

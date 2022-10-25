@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="{{@site.locale}}">
+    <head>
+
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,800;1,400;1,600;1,800&family=Ubuntu:ital,wght@0,500;0,700;1,500;1,700&display=swap">
+        <link rel="stylesheet" type="text/css" href="{{asset "css/style.css"}}" />
+        <title>{{meta_title}}</title>
+
+        {{ghost_head}}
+    </head>
+    <body class="{{body_class}}">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a class="navbar-brand" href="{{@site.url}}">
+                    {{#if @site.logo}}
+                        <img src="{{@site.logo}}" alt="{{@site.title}}" />
+                    {{else}}
+                        {{@site.title}}
+                    {{/if}}
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#headerNavbar" aria-controls="headerNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="headerNavbar">
+                    {{navigation classes="navbar-nav mr-auto flex-grow"}}
+                    <ul class="navbar-nav mr-auto border-start ps-2">
+                        <li class="nav-item">
+                            <a href="#search" class="nav-link" data-ghost-search>{{>icons/search.svg}}</a>
+                        </li>
+                        {{#if @site.facebook}}
+                            <li class="nav-item">
+                                <a href="{{facebook_url @site.facebook}}" class="nav-link">{{>icons/facebook.svg}}</a>
+                            </li>
+                        {{/if}}
+                        {{#if @site.twitter}}
+                            <li class="nav-item">
+                                <a href="{{twitter_url @site.twitter}}" class="nav-link">{{>icons/twitter.svg}}</a>
+                            </li>
+                        {{/if}}
+                    </ul>
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item"><button class="btn btn-sm">Sign In</button></li>
+                        <li class="nav-item"><button class="btn btn-sm btn-primary">Sign Up</button></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <main role="main">
+            {{{body}}}
+        </main>
+
+        <footer>
+            <div class="container">
+                <div class="row">
+                    {{navigation}}
+                </div>
+            </div>
+        </footer>
+
+        <script src="{{asset "js/bundle.js"}}"></script>
+        {{ghost_foot}}
+    </body>
+</html>

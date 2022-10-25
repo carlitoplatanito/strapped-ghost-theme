@@ -1,0 +1,7 @@
+<ul class="{{classes}}">
+    {{#foreach navigation}}
+        <li class="nav-item {{concat "nav-item-" slug}}{{#if current}} active{{/if}}" role="menuitem">
+            <a class="nav-link" href="{{url absolute="true"}}">{{label}}{{#if current}}<span class="visually-hidden"> (current)</span>{{/if}}</a>
+        </li>
+    {{/foreach}}
+</ul>

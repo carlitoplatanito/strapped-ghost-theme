@@ -1,0 +1,31 @@
+<!-- tag.hbs -->
+
+<!-- Everything inside of #tag pulls data from the tag -->
+{{#tag}}
+  <header>
+  	{{#if feature_image}}
+    	<img src="{{feature_image}}" alt="{{name}}" />
+    {{/if}}
+  </header>
+
+  <section class="author-profile">
+  	<h1>{{name}}</h1>
+    {{#if description}}
+      <h2>{{description}}</h2>
+    {{/if}}
+  </section>
+{{/tag}}
+
+<content class="container">
+    <!-- includes the post loop - partials/loop.hbs -->
+    <div class="row">
+    {{#foreach posts}}
+        <div class="col">
+            {{> post-card}}
+        </div>
+    {{/foreach}}
+    </div>
+</content>
+
+<!-- Previous/next page links - displayed on every page -->
+{{pagination}}

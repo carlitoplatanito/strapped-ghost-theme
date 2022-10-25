@@ -1,0 +1,25 @@
+/**
+ * Styles for Ghost Cards
+ *
+ */ 
+
+.kg-card {
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    max-width: 100%;
+    overflow: hidden;
+    font-family: $font-family-base;
+    img,
+    iframe,
+    blockquote {
+        max-width: 100%;
+    }
+}
+
+.kg-image-card {
+    & .kg-image {
+        max-width: 100%;
+        height: auto;
+    }
+}

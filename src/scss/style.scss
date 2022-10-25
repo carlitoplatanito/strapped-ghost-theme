@@ -1,0 +1,144 @@
+
+@import "_global";
+
+.navbar {
+    @extend .sticky-top;
+    @extend .bg-light;
+    .container {
+        max-width: $navbar-max-width;
+    }
+    .navbar-brand img {
+        width: auto;
+        max-height: 100px;
+    }
+    // align nav to right
+    .navbar-collapse {
+        justify-content: flex-end;
+    }
+}
+
+.jumbotron {
+    @extend .bg-primary;
+    padding: 4rem 2rem;
+    position: relative;
+    overflow: hidden;
+    .jumbo-cover {
+        position: absolute;
+        z-index: -1;
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        top: 0;
+        left: 0;
+    }
+
+    .jumbo-container {
+        @extend .container;
+        @extend .text-center;
+    }
+
+    .jumbo-logo {
+        width: 100%;
+        max-width: 600px;
+        height: auto;
+        display: none;
+    }
+
+    .jumbo-title {
+        @extend .display-1;
+    }
+
+    .jumbo-description {
+        @extend .lead;
+    }
+
+}
+
+.card {
+    border: none;
+    .card-group > & {
+        flex: 1 0 30%;
+        margin-left: 1%;
+        margin-right: 1%;
+        @extend .my-2;
+    }
+    .card-img {
+        @extend .card-img-top;
+        @extend .ratio;
+        @extend .ratio-1x1;
+        & > img {
+            object-fit: cover;
+        }
+    }
+    .card-body {
+        .card-meta {
+            @extend .mt-2;
+            @extend .pt-1;
+            @extend .border-top;
+        }
+    }
+
+    // variants
+    .card-group-vertical > & {
+        @include media-breakpoint-up(sm) {
+            flex: 1 0 100%;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            margin-left: 0;
+            margin-right: 0;
+            .card-img {
+                width: 40%;
+                margin-bottom: 0;
+            }
+            .card-body {
+                width: 60%;
+            }
+        }
+        @include media-breakpoint-up(md) {
+            .card-img {
+                width: 25%;
+            }
+            .card-body {
+                width: 75%;
+            }
+        }
+    }
+}
+
+/* .cards-list-alt {
+    @extend .row;
+    .card-container {
+        @extend .col-12;
+        .card {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            .card-img {
+                width: 50%;
+            }
+            .card-body {
+                width: 50%;
+            }
+        }
+        &:nth-child(odd) {
+            .card {
+                .card-img {
+                    order: 2;
+                }
+                .card-body {
+                    order: 1;
+                }
+            }
+        }
+    }
+} */
+
+
+/* .cards-list .card {
+    .card-img {
+        max-width: 50%;
+    }
+    .card-body {
+        width: 50%;
+    }
+} */

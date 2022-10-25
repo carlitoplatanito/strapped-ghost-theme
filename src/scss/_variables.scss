@@ -1,0 +1,41 @@
+
+// auto-generated variables file that comes from
+// the connected ghost instance.
+// Set URL & Auth keys in .env
+@import "../../src/scss/ghost";
+
+// base fonts
+// $font-family-sans-serif: sans;
+// $font-family-serif: serif;
+// $font-family-base: $font-family-serif;
+
+// styled font used for display/headers
+// $font-family-display: Impact;
+
+// gets overriden by the generated `ghost.scss` if set
+$primary: #000 !default;
+/*
+$secondary:     $gray-600 !default;
+$success:       $green !default;
+$info:          $cyan !default;
+$warning:       $yellow !default;
+$danger:        $red !default;
+$light:         $gray-100 !default;
+$dark:          $gray-900 !default;
+*/
+
+$link-decoration: none;
+$link-hover-decoration: none;
+$link-hover-color: none;
+
+// scss-docs-start container-max-widths
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px, // make 960 the max container width
+  // xl: 1140px,
+  // xxl: 1320px
+);
+// scss-docs-end container-max-widths
+
+$navbar-max-width: 1200px; // lil wider than the content container on desktop
