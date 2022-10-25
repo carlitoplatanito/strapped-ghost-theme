@@ -4,7 +4,10 @@
 # - make, inotify-tools, zip, jq
 # - Node & Yarn
 
-include .env
+ifneq (,$(wildcard ./.env))
+    include .env
+    export
+endif
 
 MAKEFLAGS += --silent
 
@@ -18,12 +21,12 @@ assets: assets/img assets/js assets/css
 
 assets/css: assets/css/style.css ## Compile SASS
 
-src/scss/_ghost.scss:
-ifdef $(GHOST_ADMIN_API_KEY)
+src/scss/_ghost.scss: ## Generates scss file with Live Theme Integration
+ifdef GHOST_ADMIN_API_KEY
 	@echo '\044primary: $(shell curl \
 		-H "Authorization: Ghost ${GHOST_ADMIN_API_KEY}" \
 		-H "Accept-Version: v5.1" \
-		-s ${GHOST_ADMIN_API_KEY}/ghost/api/admin/site/ | jq -r ".site.accent_color")' > src/scss/_ghost.scss
+		-s ${GHOST_API_URL}/ghost/api/admin/site/ | jq -r ".site.accent_color")' > src/scss/_ghost.scss
 else
 	@touch src/scss/_ghost.scss
 endif
@@ -41,9 +44,8 @@ assets/img: $(wildcard src/img/*) ## Compress images and create compressed webm 
 
 icons:
 	@(cd node_modules/bootstrap-icons/icons/; \
-	for file in *.svg; do \
-		echo ${file}; \
-		cp "${file}" "assets/partials/icons/${file/%.svg/.hbs}"; \
+	for FILE in *.svg; do \
+		cp $$FILE partials/icons/$$FILE.hbs; \
 	done)
 
 zip: ${THEME_NAME}.zip ## convert the package tgz to theme.zip (runs automatically after `yarn pack`)
@@ -69,4 +71,4 @@ test: assets
 	@yarn gscan . --fatal --verbose
 
 clean:
-	@rm -rf assets || echo "Skipping"
+	@rm -rf assets src/scss/_ghost.scss || echo "Skipping"
