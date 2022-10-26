@@ -1,7 +1,7 @@
 {
   "name": "strapped",
   "displayName": "Strapped",
-  "description": "Starter Bootstrap Theme for Ghost Platform",
+  "description": "Yet Another Bootstrap Start Theme, but for Ghost Platform",
   "version": "1.0.0",
   "engines": {
     "ghost": ">=5.0.0"
@@ -79,10 +79,8 @@
   ],
   "scripts": {
     "start": "make watch",
-    "prepare": "make",
     "test": "make test",
-    "prepack": "make",
-    "postpack": "make zip"
+    "prepack": "make build"
   },
   "dependencies": {
     "@popperjs/core": "^2.10.2",

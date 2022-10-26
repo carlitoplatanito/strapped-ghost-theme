@@ -29,16 +29,16 @@
                     {{navigation classes="navbar-nav mr-auto flex-grow"}}
                     <ul class="navbar-nav mr-auto border-start ps-2">
                         <li class="nav-item">
-                            <a href="#search" class="nav-link" data-ghost-search>{{>icons/search.svg}}</a>
+                            <a href="#search" class="nav-link" data-ghost-search>{{>"icons/search.svg"}}</a>
                         </li>
                         {{#if @site.facebook}}
                             <li class="nav-item">
-                                <a href="{{facebook_url @site.facebook}}" class="nav-link">{{>icons/facebook.svg}}</a>
+                                <a href="{{facebook_url @site.facebook}}" class="nav-link">{{>"icons/facebook.svg"}}</a>
                             </li>
                         {{/if}}
                         {{#if @site.twitter}}
                             <li class="nav-item">
-                                <a href="{{twitter_url @site.twitter}}" class="nav-link">{{>icons/twitter.svg}}</a>
+                                <a href="{{twitter_url @site.twitter}}" class="nav-link">{{>"icons/twitter.svg"}}</a>
                             </li>
                         {{/if}}
                     </ul>
