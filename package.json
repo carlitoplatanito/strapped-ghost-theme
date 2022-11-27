@@ -68,6 +68,11 @@
     },
     "card_assets": true,
     "custom": {
+      "home_tags": {
+        "type": "text",
+        "default": "welcome,portfolio,team,partners,testimonials",
+        "group": "home"
+      },
       "instagram": {
         "type": "text",
         "default": "https://instagram.com/carlitoplatanito"
@@ -80,7 +85,8 @@
   "scripts": {
     "start": "make watch",
     "test": "make test",
-    "prepack": "make build"
+    "prepack": "make build",
+    "clean": "make clean && rm -rf node_modules"
   },
   "dependencies": {
     "@popperjs/core": "^2.10.2",
@@ -90,9 +96,7 @@
     "jquery": "^3.6.1"
   },
   "devDependencies": {
-    "autoprefixer": "^10.2.5",
     "browserify": "^17.0.0",
-    "cssnano": "^4.1.10",
     "gscan": "^4.34.0",
     "imagemin-cli": "^7.0.0",
     "imagemin-gifsicle": "^7.0.0",
@@ -101,7 +105,6 @@
     "imagemin-webp": "^7.0.0",
     "jsdom": "^19.0.0",
     "lodash": "^4.17.21",
-    "postcss": "^8.2.13",
     "sass": "^1.50.0"
   }
 }

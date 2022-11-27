@@ -23,6 +23,7 @@ THEME_VERSION := $(shell node -pe 'require("./package.json").version')
 all: node_modules build help ## (default) checks for upgrades and builds all static files
 
 build: partials/icons assets/img assets/js/bundle.js assets/css/style.css ## builds all the static assets
+	@echo "✅ Everything is up-to-date"
 
 zip: ${THEME_NAME}.zip ## convert the package tgz to ${THEME_NAME}.zip
 
@@ -40,19 +41,22 @@ help: ## displays this help
 	@echo "Targets:"
 	@grep --no-filename -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
-watch: all ## watches for changes using inotifywait OR sleeps for 3 seconds then triggers a build
+watch: node_modules build ## watches for changes using inotifywait OR sleeps for 3 seconds then triggers a build
+	@echo "🐒 What's poppin? I'm 0scar the Dev Monkey,\n   I watch the source code and keep the build files up to date."
 	@while true; do \
-		inotifywait -qr -e modify -e move -e create -e delete src *.hbs */*.hbs || sleep 3; \
-    	make build; \
+		echo "🙈 I'm watching you."; \
+		inotifywait -qr --format "🙊 Did someone %e %w?" -e modify -e move -e create -e delete src *.hbs */*.hbs|| sleep 3; \
+		make build; \
+		echo "🐵 Fast as fck boy!"; \
 	done
 
 test: assets ## runs gscan test
 	@yarn gscan . --fatal --verbose
 
 clean: ## clean up built assets and reset Live Theme variables
-	@rm -rf assets || echo "Skipping"
+	@rm -rf assets *.zip *.tgz || echo "Skipping"
 
-#- Real Targets
+#- Real Targets & Thier short cuts
 
 assets/css/_live.scss: $(wildcard .env*)
 	mkdir -p assets/css
@@ -77,7 +81,7 @@ assets/img: $(wildcard src/img/*)
 
 partials/icons: $(wildcard *.hbs */*.hbs node_modules/bootstrap-icons/icons/*.svg)
 	@(for FILE in $(shell grep --exclude-dir="partials/icons" -h --only-matching -E "icons\/.+\.svg" *.hbs **/*.hbs); do \
-		cp node_modules/bootstrap-icons/$$FILE partials/$$FILE.hbs; \
+		cp -u node_modules/bootstrap-icons/$$FILE partials/$$FILE.hbs; \
 	done)
 
 ${THEME_NAME}.zip: ${THEME_NAME}-v${THEME_VERSION}.tgz
