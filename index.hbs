@@ -2,34 +2,13 @@
 {{!-- The tag above means: insert everything in this file
 into the {body} of the default.hbs template --}}
 
-<div class="jumbotron">
-    {{#if @site.cover_image}}
-        <img class="jumbo-cover"
-            srcset="{{img_url @site.cover_image size="s"}} 300w,
-                    {{img_url @site.cover_image size="m"}} 600w,
-                    {{img_url @site.cover_image size="l"}} 1000w,
-                    {{img_url @site.cover_image size="xl"}} 2000w"
-            sizes="100vw"
-            src="{{img_url @site.cover_image size="xl"}}"
-            alt="{{@site.title}}"
-        />
-    {{/if}}
-    <div class="jumbo-container">
-        {{#if @site.logo}}
-            <img class="jumbo-logo" src="{{@site.logo}}" alt="{{@site.title}}">
-        {{/if}}
-        <h1 class="jumbo-title">{{@site.title}}</h1>
-        {{#if @site.description}}
-            <p class="jumbo-description">{{@site.description}}</p>
-        {{/if}}
-    </div>
-</div>
-{{#get "pages"}}
+{{>jumbotron}}
+{{#get "pages" filter="primary_tag:home"}}
 {{#foreach pages}}
-<div class="container-fluid {{body_class}}">
+<div class="container">
     <div class="row">
         {{#if feature_image}}
-            <div class="col-6">
+            <div class="col-12 col-sm-6">
                 <img class="img-fluid"
                 srcset="{{img_url feature_image size="s"}} 300w,
                         {{img_url feature_image size="m"}} 600w,
@@ -40,14 +19,19 @@ into the {body} of the default.hbs template --}}
                 alt="{{feature_image_alt}}"
                 />
             </div>
-            <div class="col-6">
-        {{else}}
-            <div class="col-12">
         {{/if}}
+            <div class="col-12{{#if feature_image}} col-sm-6{{/if}}">
                 <h2>{{title}}</h2>
-                <div class="content">
-                    {{{content}}}
-                </div>
+                {{#if custom_excerpt}}
+                    <p class="lead" style="white-space: pre;">{{{custom_excerpt}}}</p>
+                    <div class="mt-4">
+                        <a class="btn btn-outline-primary">Read more</a>
+                    </div>
+                {{else}}
+                    <div class="gh-content">
+                        {{{content}}}
+                    </div>
+                {{/if}}
             </div>
         </div>
     </div>
@@ -55,7 +39,6 @@ into the {body} of the default.hbs template --}}
 {{/foreach}}
 {{/get}}
 <div class="container">
-    <h2>Latest Posts</h2>
     <div class="card-group">
         {{#foreach posts}}
             {{> "post-card"}}

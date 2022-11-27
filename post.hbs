@@ -25,51 +25,6 @@
 {{/if}}
 
     <header class="container">
-        <div class="article-tag post-card-tags">
-            {{#primary_tag}}
-                <span class="post-card-primary-tag">
-                    <a href="{{url}}">{{name}}</a>
-                </span>
-            {{/primary_tag}}
-            {{#if featured}}
-                <span class="post-card-featured">{{>"icons/fire.svg"}} Featured</span>
-            {{/if}}
-        </div>
-        <h1 class="article-title">{{title}}</h1>
-        {{#if custom_excerpt}}
-            <p class="article-excerpt">{{custom_excerpt}}</p>
-        {{/if}}
-
-        <div class="article-byline">
-        <section class="article-byline-content">
-
-            <ul class="author-list">
-                {{#foreach authors}}
-                <li class="author-list-item">
-                    {{#if profile_image}}
-                    <a href="{{url}}" class="author-avatar">
-                        <img class="author-profile-image" src="{{img_url profile_image size="xs"}}" alt="{{name}}" />
-                    </a>
-                    {{else}}
-                    <a href="{{url}}" class="author-avatar author-profile-image">{{>"icons/person-circle.svg"}}</a>
-                    {{/if}}
-                </li>
-                {{/foreach}}
-            </ul>
-
-            <div class="article-byline-meta">
-                <h4 class="author-name">{{authors}}</h4>
-                <div class="byline-meta-content">
-                    <time class="byline-meta-date" datetime="{{date format="YYYY-MM-DD"}}">{{date}}</time>
-                    {{#if reading_time}}
-                        <span class="byline-reading-time"><span class="bull">&bull;</span> {{reading_time}}</span>
-                    {{/if}}
-                </div>
-            </div>
-
-        </section>
-        </div>
-
         {{#if feature_image}}
             <figure class="figure">
                 <img
@@ -87,6 +42,26 @@
                 {{/if}}
             </figure>
         {{/if}}
+        <div class="post-tags">
+            {{#primary_tag}}
+                <span class="post-primary-tag">
+                    <a href="{{url}}">{{name}}</a>
+                </span>
+            {{/primary_tag}}
+            {{#if featured}}
+                <span class="post-featured">{{>"icons/fire.svg"}} Featured</span>
+            {{/if}}
+        </div>
+        <h1 class="post-title">{{title}}</h1>
+        <section class="post-meta">
+            <ul class="list-inline">
+                <li class="list-inline-item"><time class="post-published" datetime="{{date format="YYYY-MM-DD"}}">{{date}}</time></li>
+                <li class="list-inline-item border-start ps-3">{{authors}}</li>
+                {{#if reading_time}}
+                    <li class="list-inline-item border-start ps-3"><span class="post-reading-time">{{reading_time}}</span></li>
+                {{/if}}
+            </ul>
+        </section>
     </header>
 
     <section class="container gh-content">
@@ -100,26 +75,6 @@
     {{/if}}
 </article>
 
-{{!-- A signup call to action is displayed here, unless viewed as a logged-in member --}}
-{{#if @site.members_enabled}}
-{{#unless @member}}
-{{#unless @site.comments_enabled}}
-{{#if access}}
-    <section class="footer-cta outer">
-        <div class="inner">
-            {{#if @custom.email_signup_text}}<h2 class="footer-cta-title">{{@custom.email_signup_text}}</h2>{{/if}}
-            <a class="footer-cta-button" href="#/portal" data-portal>
-                <div class="footer-cta-input">Enter your email</div>
-                <span>Subscribe</span>
-            </a>
-        </div>
-    </section>
-{{/if}}
-{{/unless}}
-{{/unless}}
-{{/if}}
-
-
 {{!-- Read more links, just above the footer --}}
 {{#if @custom.show_recent_posts_footer}}
     {{!-- The {#get} helper below fetches some of the latest posts here
@@ -128,7 +83,6 @@
     This query gets the latest 3 posts on the site, but adds a filter to
     exclude the post we're currently on from being included. --}}
     {{#get "posts" filter="id:-{{id}}" limit="3" as |more_posts|}}
-
         {{#if more_posts}}
             <aside class="read-more-wrap outer">
                 <div class="read-more inner">

@@ -1,0 +1,22 @@
+<ul class="{{classes}}">
+    {{#if showSearch}}
+    <li class="nav-item">
+        <a href="#search" class="nav-link" data-ghost-search>{{>"icons/search.svg"}}</a>
+    </li>
+    {{/if}}
+    {{#if @site.facebook}}
+    <li class="nav-item">
+        <a href="{{facebook_url @site.facebook}}" class="nav-link">{{>"icons/facebook.svg"}}</a>
+    </li>
+    {{/if}}
+    {{#if @site.twitter}}
+    <li class="nav-item">
+        <a href="{{twitter_url @site.twitter}}" class="nav-link">{{>"icons/twitter.svg"}}</a>
+    </li>
+    {{/if}}
+    {{#if @custom.instagram}}
+    <li class="nav-item">
+        <a href="{{@custom.instagram}}" class="nav-link">{{>"icons/instagram.svg"}}</a>
+    </li>
+    {{/if}}
+</ul>

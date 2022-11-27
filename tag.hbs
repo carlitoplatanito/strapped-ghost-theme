@@ -1,31 +1,31 @@
-<!-- tag.hbs -->
-
-<!-- Everything inside of #tag pulls data from the tag -->
+{{!< default}}
 {{#tag}}
-  <header>
-  	{{#if feature_image}}
-    	<img src="{{feature_image}}" alt="{{name}}" />
-    {{/if}}
-  </header>
-
-  <section class="author-profile">
-  	<h1>{{name}}</h1>
-    {{#if description}}
-      <h2>{{description}}</h2>
-    {{/if}}
-  </section>
+    {{#get "pages" filter="slug:{{slug}}+primary_tag:{{slug}}" limit="1"}}
+        {{#foreach pages}}
+            {{>jumbotron}}
+            <section class="container my-4 gh-content">
+                {{content}}
+            </section>
+        {{/foreach}}
+    {{else}}
+        {{>jumbotron}}
+    {{/get}}
+        {{#get "pages" filter="primary_tag:{{slug}}+slug:-{{slug}}"}}
+        <div class="container">
+            <div class="card-group card-group-vertical">
+                {{#foreach pages}}
+                    {{> "post-card"}}
+                {{/foreach}}
+            </div>
+        </div>
+        {{/get}}
 {{/tag}}
 
-<content class="container">
-    <!-- includes the post loop - partials/loop.hbs -->
-    <div class="row">
-    {{#foreach posts}}
-        <div class="col">
-            {{> post-card}}
-        </div>
-    {{/foreach}}
+<p>{{title}}</p>
+<div class="container">
+    <div class="card-group">
+        {{#foreach posts}}
+            {{> "post-card"}}
+        {{/foreach}}
     </div>
-</content>
-
-<!-- Previous/next page links - displayed on every page -->
-{{pagination}}
+</div>

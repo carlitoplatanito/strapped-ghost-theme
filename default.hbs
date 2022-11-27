@@ -9,12 +9,16 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,800;1,400;1,600;1,800&family=Ubuntu:ital,wght@0,500;0,700;1,500;1,700&display=swap">
         <link rel="stylesheet" type="text/css" href="{{asset "css/style.css"}}" />
         <title>{{meta_title}}</title>
-
+        {{#is "page"}}{{#page}}
+            {{#match slug "=" primary_tag.slug}}
+                <meta http-equiv="refresh" content="0;url='{{primary_tag.url}}'" />
+            {{/match}}
+        {{/page}}{{/is}}
         {{ghost_head}}
     </head>
     <body class="{{body_class}}">
         <nav class="navbar navbar-expand-lg">
-            <div class="container">
+            <div class="container-wide">
                 <a class="navbar-brand" href="{{@site.url}}">
                     {{#if @site.logo}}
                         <img src="{{@site.logo}}" alt="{{@site.title}}" />
@@ -27,21 +31,7 @@
                 </button>
                 <div class="collapse navbar-collapse" id="headerNavbar">
                     {{navigation classes="navbar-nav mr-auto flex-grow"}}
-                    <ul class="navbar-nav mr-auto border-start ps-2">
-                        <li class="nav-item">
-                            <a href="#search" class="nav-link" data-ghost-search>{{>"icons/search.svg"}}</a>
-                        </li>
-                        {{#if @site.facebook}}
-                            <li class="nav-item">
-                                <a href="{{facebook_url @site.facebook}}" class="nav-link">{{>"icons/facebook.svg"}}</a>
-                            </li>
-                        {{/if}}
-                        {{#if @site.twitter}}
-                            <li class="nav-item">
-                                <a href="{{twitter_url @site.twitter}}" class="nav-link">{{>"icons/twitter.svg"}}</a>
-                            </li>
-                        {{/if}}
-                    </ul>
+                    {{>social-navigation classes="navbar-nav mr-auto border-start ps-2" showSearch="true"}}
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item"><button class="btn btn-sm">Sign In</button></li>
                         <li class="nav-item"><button class="btn btn-sm btn-primary">Sign Up</button></li>
@@ -54,14 +44,42 @@
             {{{body}}}
         </main>
 
-        <footer>
-            <div class="container">
-                <div class="row">
-                    {{navigation}}
+        <footer class="py-5">
+            <div class="container-wide">
+            <div class="row">
+                <div class="col-6 col-md-3 mb-3">
+                    {{navigation classes="nav flex-column gap-0"}}
+                </div>
+                <div class="col-6 col-md-3 mb-3">
+                    <h5 class="ms-3">Title</h5>
+                    {{navigation classes="nav flex-column gap-0" type="secondary"}}
+                </div>
+                <div class="col-md-5 offset-md-1 mb-3">
+                    <p class="lead mb-4">{{@site.description}}</p>
+                    {{#if @site.members_enabled}}
+                    {{#unless @member}}
+                    <form class="border-top pt-4" action="#/portal" method="GET" data-portal>
+                    <h5>Subscribe to our newsletter</h5>
+                    <p>Monthly digest of what's new and exciting from us.</p>
+                    <div class="d-flex flex-column flex-sm-row w-100 gap-2">
+                        <label for="newsletter1" class="visually-hidden">Email address</label>
+                        <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
+                        <button class="btn btn-primary" type="button">Subscribe</button>
+                    </div>
+                    </form>
+                    {{else}}
+                        <div>Account stuff</div>
+                    {{/unless}}
+                    {{/if}}
                 </div>
             </div>
-        </footer>
 
+            <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
+            <p>© {{date format="Y"}} {{@site.title}}. {{t "All rights reserved."}}</p>
+            {{>social-navigation classes="list-unstyled d-flex gap-3"}}
+            </div>
+            </div>
+        </footer>
         <script src="{{asset "js/bundle.js"}}"></script>
         {{ghost_foot}}
     </body>

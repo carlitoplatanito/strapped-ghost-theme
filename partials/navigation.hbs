@@ -1,4 +1,7 @@
 <ul class="{{classes}}">
+    {{#if navTitle}}
+        <li class="nav-item"><h5 class="nav-title nav-link disabled">{{navTitle}}</h5></li>
+    {{/if}}
     {{#foreach navigation}}
         <li class="nav-item {{concat "nav-item-" slug}}{{#if current}} active{{/if}}" role="menuitem">
             <a class="nav-link" href="{{url absolute="true"}}">{{label}}{{#if current}}<span class="visually-hidden"> (current)</span>{{/if}}</a>

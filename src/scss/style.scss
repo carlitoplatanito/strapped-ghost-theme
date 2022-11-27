@@ -1,12 +1,22 @@
 
 @import "_global";
 
+.container-wide {
+    @extend .container;
+    max-width: $navbar-max-width;
+}
+
+.list-inline {
+    & > li {
+        @extend .list-inline-item;
+        @extend .p-2;
+        text-align: center;
+    }
+}
+
 .navbar {
     @extend .sticky-top;
     @extend .bg-light;
-    .container {
-        max-width: $navbar-max-width;
-    }
     .navbar-brand img {
         width: auto;
         max-height: 100px;
@@ -103,6 +113,11 @@
             }
         }
     }
+}
+
+.lead {
+    // translate breaks in desc or excerpt into visual breaks
+    white-space: pre;
 }
 
 /* .cards-list-alt {

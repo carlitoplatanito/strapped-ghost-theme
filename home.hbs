@@ -1,0 +1,67 @@
+{{!< default}}
+{{!-- The tag above means: insert everything in this file
+into the {body} of the default.hbs template --}}
+
+<div class="jumbotron {{-classes-}}"{{#if id}}id="{{id}}"{{/if}}>
+    {{#if @site.cover_image}}
+        <img class="jumbo-cover"
+            srcset="{{img_url @site.cover_image size="s"}} 300w,
+                    {{img_url @site.cover_image size="m"}} 600w,
+                    {{img_url @site.cover_image size="l"}} 1000w,
+                    {{img_url @site.cover_image size="xl"}} 2000w"
+            sizes="100vw"
+            src="{{img_url @site.cover_image size="xl"}}"
+            alt="{{@site.title}}"
+        />
+    {{/if}}
+    <div class="jumbo-container">
+        {{#if @site.logo}}
+            <img class="jumbo-logo" src="{{@site.logo}}" alt="{{@site.title}}">
+        {{/if}}
+        <h1 class="jumbo-title">{{@site.title}}</h1>
+        {{#if @site.description}}
+            <p class="jumbo-description">{{@site.description}}</p>
+        {{/if}}
+    </div>
+</div>
+
+{{#get "tags" filter="slug:[{{@custom.home_tags}}]" include="count.posts"}}
+{{#foreach tags}}
+<section class="py-4 {{#if accent_color}}text-light{{/if}}" {{#if accent_color}} style="background-color:{{accent_color}};"{{/if}}>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 {{#if feature_image}}col-6{{else}}text-center{{/if}}">
+                <h2 class="display-4">{{name}}</h2>
+                <p class="lead">{{{description}}}</p>
+                {{#if cononical_url}}
+                    <a class="btn btn-lg btn-primary" href="{{cononical_url}}">{{t "Learn more"}}</a>
+                {{/if}}
+                {{#match scount.posts ">" 3}}
+                    <a class="btn btn-lg btn-secondary" href="{{url}}">{{t "More {tagName}" tagName=name}}</a>
+                {{/match}}
+            </div>
+            {{#if feature_image}}
+                <div class="col">
+                    <img class="img-fluid"
+                    srcset="{{img_url feature_image size="s"}} 300w,
+                            {{img_url feature_image size="m"}} 600w,
+                            {{img_url feature_image size="l"}} 1000w,
+                            {{img_url feature_image size="xl"}} 2000w"
+                    sizes="100vw"
+                    src="{{img_url feature_image size="m"}}"
+                    alt="{{feature_image_alt}}"
+                    />
+                </div>
+            {{/if}}
+        </div>
+        {{#get "posts" filter="primary_tag:{{slug}}+featured:true" limit="3"}}
+        <div class="card-group{{#match ../count.posts "<" 2}} card-group-vertical{{/match}} card-group-{{../slug}}">
+            {{#foreach posts}}
+                {{> "post-card"}}
+            {{/foreach}}
+        </div>
+        {{/get}}
+    </div>
+</section>
+{{/foreach}}
+{{/get}}
